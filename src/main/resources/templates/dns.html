@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DNS PAGE</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="css/stylesheet" href="about.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+<!-- Contact section-->
+<section class="bg-light py-5">
+    <div class="container px-5 my-5 px-5">
+        <div class="text-center mb-5">
+            <div class="alert alert-danger" th:if="${error}" th:text="${error}" role="alert">No Records Found</div>
+            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-diagram-3-fill"></i></div>
+            <h2 class="fw-bolder">Enter Dns Query</h2>
+            <p class="lead mb-0">Currently we are supporting only few domain names</p>
+        </div>
+        <div class="row gx-5 justify-content-center">
+            <div class="col-lg-6">
+                <form class="row g-3 needs-validation" id="contactForm" th:action="@{/dns}"  method="post" th:object="${user}" novalidate>
+                    <!-- Name input-->
+                    <div class="form-floating mb-3">
+
+                        <input class="form-control" id="name" type="text"  name="domain" placeholder="Enter Domain name..."  required/>
+                        <label for="name" class="form-label"> Enter Domain Name</label>
+                        <div class="invalid-feedback">
+                            Please provide Input.
+                        </div>
+                    </div>
+
+                    <div class="d-grid"><button class="btn btn-primary " id="submitButton" type="submit">Submit</button></div>
+                </form>
+            </div>
+
+        </div>
+        <br><br>
+        <div th:if="${message} != null">
+            <table class="table">
+                <tbody>
+                <tr class="table-active">
+                    <th scope="row">Domain Name</th>
+                    <td th:text="${message}">Domain name</td>
+                    <!--                <td th:text="${proxysub}">Ips</td>-->
+                    <!--                <td th:text="${record}">Records</td>-->
+                    <!--                <td ><a th:href=" 'http://' + ${link} + '/'" target="_blank"> click here </a></td>-->
+                </tr>
+                <tr class="table-active">
+                    <th scope="row">IP Address</th>
+                    <!--                <td th:text="${message}">Domain name</td>-->
+                        <td th:text="${proxysub}" />
+                    <!--                              <td th ="${proxysub}">Ips</td>-->
+                    <!--                <td th:text="${record}">Records</td>-->
+                    <!--                <td ><a th:href=" 'http://' + ${link} + '/'" target="_blank"> click here </a></td>-->
+                </tr>
+                <tr  th:if="${sub}" class="table-active" >
+                    <th scope="row">Other Details</th>
+<td th:text="${sub}"></td>
+                </tr>
+
+
+                <tr class="table-active">
+                    <th scope="row">Record Type</th>
+                    <td th:text="${record}">Records</td>
+                    <!--                <td th:text="${proxysub}">Ips</td>-->
+                    <!--                <td th:text="${record}">Records</td>-->
+                    <!--                <td ><a th:href=" 'http://' + ${link} + '/'" target="_blank"> click here </a></td>-->
+                </tr>
+                <tr class="table-active">
+                    <th scope="row">Website Link</th>
+
+                    <!--                <td th:text="${proxysub}">Ips</td>-->
+                    <!--                <td th:text="${record}">Records</td>-->
+                    <td ><a th:href=" 'http://' + ${link} + '/'" target="_blank"> click here </a></td>
+                </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+</section>
+</body>
+<script th:inline="javascript">
+var nameJs = /*[[${working}]]*/;
+if(nameJs=="mania"){
+document.getElementById("Parent").style.color="green";
+}
+
+</script>
+<script src="js/scripts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</html>
